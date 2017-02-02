@@ -9,3 +9,6 @@ GDCdownload(miRNAq, chunks.per.download= 250)
 
 RNATable <-  GDCprepare(RNAq,mut.pipeline = NULL)
 miRNATable <- GDCprepare(miRNAq,mut.pipeline = NULL)
+
+save(RNATable, file = "RNATable.RData")
+save(miRNATable, file = "miRNATable.RData")
