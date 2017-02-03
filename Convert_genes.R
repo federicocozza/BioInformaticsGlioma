@@ -40,3 +40,4 @@ save(RNAByAliquot,file = "RNAByAliquot.Rdata")
 names(RNAByAliquot) <- c("genes",colData(RNATable)$patient)
 row.names(RNAByAliquot) <- RNAByAliquot$genes
 RNAByAliquot <- RNAByAliquot[,-1]
+
