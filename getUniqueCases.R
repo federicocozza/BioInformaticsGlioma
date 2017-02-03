@@ -1,6 +1,12 @@
-t <- read.table("file_matching.txt", header = TRUE, sep = "\t")
-tRNA <- t[which(t$experimental_strategy=="RNA-Seq"),]
-tmiRNA <- t[which(t$experimental_strategy=="miRNA-Seq"),]
-v1 <- unique(tRNA$cases_0_case_id)
-v2 <- unique(tmiRNA$cases_0_case_id)
+tRNA <- read.table("all_rna.txt", header = TRUE, sep = "\t")
+tmiRNA <- read.table("all_mirna.txt", header = TRUE, sep = "\t")
+
 tmerged <- intersect(unique(tRNA$cases_0_case_id), unique(tmiRNA$cases_0_case_id))
+tmerged
+
+miRNA 34464
+RNA 46329
+
+totale 80793
+
+intersezione 10140
