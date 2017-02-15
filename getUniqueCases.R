@@ -1,12 +1,25 @@
 tRNA <- read.table("all_rna.txt", header = TRUE, sep = "\t")
 tmiRNA <- read.table("all_mirna.txt", header = TRUE, sep = "\t")
 
+
 tmerged <- intersect(unique(tRNA$cases_0_case_id), unique(tmiRNA$cases_0_case_id))
 tmerged
 
-miRNA 34464
-RNA 46329
+##tmiRNA with only mirnas.quantification.txt
+tmiRNA <- tmiRNA[which(tmiRNA$file_name == "mirnas.quantification.txt"),]
 
-totale 80793
+##length(which(tmiRNA$cases_0_samples_0_sample_type == "Primary Tumor"))
 
-intersezione 10140
+#removed Metastatic
+tmiRNA <- tmiRNA[-which(tmiRNA$cases_0_samples_0_sample_type == "Metastatic"),]
+
+#tRNA filtered on FPKM-UQ.txt.gz
+tRNA <- tRNA[which(endsWith(as.character(tRNA$file_name) ,".FPKM-UQ.txt.gz") == TRUE),]
+
+#removed Metastatic
+tRNA <- tRNA[-which(tRNA$cases_0_samples_0_sample_type == "Metastatic"),]
+
+tmerged <- intersect(tRNA$cases_0_case_id,tmiRNA$cases_0_case_id)
+tmerged <- as.data.frame(tmerged)
+
+tRNA2 <- which(tRNA$cases_0_case_id %in% tmiRNA$cases_0_case_id)
