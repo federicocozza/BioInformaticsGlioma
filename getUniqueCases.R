@@ -7,13 +7,17 @@ tmiRNA <- tmiRNA[which(tmiRNA$file_name == "mirnas.quantification.txt"),]
 ##length(which(tmiRNA$cases_0_samples_0_sample_type == "Primary Tumor"))
 
 #removed Metastatic
-tmiRNA <- tmiRNA[-which(tmiRNA$cases_0_samples_0_sample_type == "Metastatic"),]
+#tmiRNA <- tmiRNA[-which(tmiRNA$cases_0_samples_0_sample_type == "Metastatic"),]
 
 #tRNA filtered on FPKM-UQ.txt.gz
 tRNA <- tRNA[which(endsWith(as.character(tRNA$file_name) ,".FPKM-UQ.txt.gz") == TRUE),]
 
+# Now we have 594 obs and we add a column = col names of RNAByAliquot
+
+tRNA[14] <- colnames(RNAByAliquot)
+
 #removed Metastatic
-tRNA <- tRNA[-which(tRNA$cases_0_samples_0_sample_type == "Metastatic"),]
+#tRNA <- tRNA[-which(tRNA$cases_0_samples_0_sample_type == "Metastatic"),]
 
 #get common case_id
 tmerged <- intersect(tRNA$cases_0_case_id,tmiRNA$cases_0_case_id)

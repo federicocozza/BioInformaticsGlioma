@@ -11,11 +11,12 @@ convertIDs <- function( ids, from, to, db, ifMultiple=c("putNA", "useFirst")) {
     duplicatedIds <- selRes[ duplicated( selRes[,1] ), 1 ]
     selRes <- selRes[ ! selRes[,1] %in% duplicatedIds, ]
   }
-  
+
   return( selRes[ match( ids, selRes[,1] ), 2 ] )
 }
 
 load("RNATableL.Rdata")
+#load("RNAByAliquotL.Rdata")
 ensembles <- rownames(assay(RNATable,1))
 
 entrez <- convertIDs(ensembles, "ENSEMBL", "ENTREZID", org.Hs.eg.db, ifMultiple = "useFirst")
@@ -31,19 +32,33 @@ rownames(filtered) <- entrez[- which(is.na(entrez))]
 
 ## Aggregate by entrezID
 RNAByAliquot <- as.data.frame(filtered)
+##----------------------------------------------
 RNAByAliquot$genes <- row.names(RNAByAliquot)
 RNAByAliquot <- aggregate(. ~ genes,FUN = median, data=RNAByAliquot)
 
-save(RNAByAliquot,file = "RNAByAliquotL.Rdata")
+#save(RNAByAliquot,file = "RNAByAliquotL.Rdata")
+save(RNAByAliquot,file = "RNAByAliquot_510.Rdata")
+load("RNAByAliquot_510.Rdata")
 
 ## Changed Barcode with patient
 RNASeqData <- colData(RNATable)
+
+### sp
+RNASeqData <- RNASeqData[which(rownames(RNASeqData) %in% colnames(RNAByAliquot)),]
+
 names(RNAByAliquot) <- c("genes",RNASeqData$patient)
 row.names(RNAByAliquot) <- RNAByAliquot$genes
 RNAByAliquot <- RNAByAliquot[,-1]
 
+### sp
+tRNA_final$V14 <- colnames(RNAByAliquot)
+
 ## Filtering out patients with not reported tumor stage 
 RNAByAliquot <- RNAByAliquot[,-which(RNASeqData$tumor_stage == "not reported")]
+
+## sp
+tRNA_final <- tRNA_final[-which(RNASeqData$tumor_stage == "not reported"),]
+
 stages <- RNASeqData$tumor_stage[-which(RNASeqData$tumor_stage == "not reported")]
 
 ## Calculating index for tumor stages and removing patients at stage 4
@@ -59,3 +74,15 @@ stage3 <- grep("stage iii[ab]*$", stages, perl = TRUE, value = FALSE)
 stages[stage1] <- "stage i"
 stages[stage2] <- "stage ii"
 stages[stage3] <- "stage iii"
+
+## sp
+tRNA_final <- tRNA_final[-stage4,]
+
+save(RNAByAliquot,file = "RNAByAliquotL.Rdata")
+
+tRNA_final$cases_0_diagnoses_0_tumor_stage <- stages
+
+save(tRNA_final,file = "tRNA_final.Rdata")
+
+length(which(nchar(colnames(RNAByAliquot)) ==12))
+length(unique(colnames(RNAByAliquot)))
