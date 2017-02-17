@@ -1699,4 +1699,4 @@ bebd0025-74e2-451b-93b3-86f82df43573	Primary Tumor	dead	133701.bam	TCGA-LUAD	525
 96dfa373-4597-49a5-942e-d9b4dc5d28fc	Primary Tumor	dead	144749.bam	TCGA-LUAD	db86194e-4adb-410d-8f84-f7467c919bff	677.0	6f127660-eeab-4c78-b1be-60178ec31610	-23370.0	23370.0	c34.3	stage ii	miRNA-Seq
 3ed05070-6633-4de5-9f72-090f93aa2e4d	Primary Tumor	alive	isoforms.quantification.txt	TCGA-LUAD	842b5251-362c-4666-85ca-2df0fd1e895d		2c4548c9-7748-46f3-bc98-ca0525995af9	-22850.0	22850.0	c34.1	stage iib	miRNA-Seq
 d3ff328c-2488-47bd-8663-366b6812c7b5	Primary Tumor	dead	127640.bam	TCGA-LUAD	1aa2397c-382e-403f-910a-f7672cb58232	929.0	fcf55fc8-7055-485b-aaaa-2f7eea308003	-28024.0	28024.0	c34.1	stage iia	miRNA-Seq
-528a0fce-0719-4b19-a69d-3f18681696c5	Primary Tumor	dead	mirnas.quantification.txt	TCGA-LUAD	491479d6-39e1-4d50-b606-1bd968e6e467	116.0	7766b350-c046-44c6-bfa0-39b862cd8fac	-17607.0	17607.0	c34.1	stage iia	miRNA-Seq
+528a0fce-0719-4b19-a69d-3f18681696c5	Primary Tumor	dead	mirnas.quantification.txt	TCGA-LUAD	491479d6-39e1-4d50-b606-1bd968e6e467	116.0	7766b350-c046-44c6-bfa0-39b862cd8fac	-17607.0	17607.0	c34.1	stage iia	miRNA-Seqa
