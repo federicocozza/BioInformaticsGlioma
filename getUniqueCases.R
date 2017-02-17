@@ -39,7 +39,6 @@ for(i in 1:z){
 
 tmiRNA_final <- tmiRNA2[-l,]
 
-
 # get just the RNA with common case_id
 l <- c()
 tRNA2 = tRNA
@@ -60,3 +59,6 @@ for(i in 1:z){
 }
 
 tRNA_final <- tRNA2[-l,]
+
+save(tRNA_final, file = "tRNA_final.RData")
+save(tmiRNA_final, file = "tmiRNA_final.RData")
