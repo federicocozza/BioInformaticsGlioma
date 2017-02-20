@@ -1,12 +1,6 @@
 library(DFP)
 library(parallel)
 
-#load("RNAFinal.Rdata")
-#load("RNAPatientsFinal.Rdata")
-
-load("RNAByAliquotL.Rdata")
-load("tRNA_final.Rdata")
-
 parDiscretizeExpressionValues <- function(cluster, rmadataset, mfs, zeta = 0.5, overlapping = 2) 
 {
     rmam <- exprs(rmadataset)
