@@ -6,7 +6,7 @@ movetolast <- function(data, move) {
   data[c(setdiff(names(data), move), move)]
 }
 
-movetolast(tRNA_final, 'cases_0_diagnoses_0_tumor_stage')
+tRNA_final <- movetolast(tRNA_final, 'cases_0_diagnoses_0_tumor_stage')
 
 stage1PatientsRNA <- tRNA_final[tRNA_final$cases_0_diagnoses_0_tumor_stage == "stage i",]
 stage2PatientsRNA <- tRNA_final[tRNA_final$cases_0_diagnoses_0_tumor_stage == "stage ii",]
@@ -41,4 +41,4 @@ testAliquot <- RNAByAliquot[,testFinalRNA$V14]
 row.names(trainFinalRNA) <- trainFinalRNA$V14
 row.names(testFinalRNA) <- testFinalRNA$V14
 
-multiDFP(trainAliquot, trainFinalRNA, "LungDFP", core = 4, overlapping = c(1, 2), piVal = c(0.4, 0.5, 0.6, 0.7), z = c(0.35, 0.4, 0.45, 0.5, 0.55), skipFactor = c(0, 1, 2, 3))
+multiDFP(trainAliquot, trainFinalRNA, "LungDFP", core = 4, overlapping = c(1, 2), piVal = 0.9, z = c(0.35, 0.4, 0.45, 0.5), skipFactor = 2)
