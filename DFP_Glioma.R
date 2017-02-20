@@ -38,4 +38,7 @@ testFinalRNA <- rbind(test_1, test_2, test_3)
 trainAliquot <- RNAByAliquot[,trainFinalRNA$V14]
 testAliquot <- RNAByAliquot[,testFinalRNA$V14]
 
-multiDFP(trainAliquot, trainFinalRNA, "LungDFP", core = 4, overlapping = c(1, 2), piVal = c(0.4, 0.5, 0.6, 0.7))
+row.names(trainFinalRNA) <- trainFinalRNA$V14
+row.names(testFinalRNA) <- testFinalRNA$V14
+
+multiDFP(trainAliquot, trainFinalRNA, "LungDFP", core = 4, overlapping = c(1, 2), piVal = c(0.4, 0.5, 0.6, 0.7), z = c(0.35, 0.4, 0.45, 0.5, 0.55), skipFactor = c(0, 1, 2, 3))
