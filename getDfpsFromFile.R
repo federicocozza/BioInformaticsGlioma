@@ -18,6 +18,7 @@ getDfpsFromFiles <- function(idx) {
 
 getDfpResults <- function(idx){
     df <- data.frame()
+    browser()
     for(i in idx) {
         fn <- paste("paramList", i, ".Rdata", sep = "")
         load(fn)

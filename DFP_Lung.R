@@ -41,4 +41,17 @@ testAliquot <- RNAByAliquot[,testFinalRNA$V14]
 row.names(trainFinalRNA) <- trainFinalRNA$V14
 row.names(testFinalRNA) <- testFinalRNA$V14
 
-multiDFP(trainAliquot, trainFinalRNA, "LungDFP", core = 4, overlapping = c(1, 2), piVal = 0.9, z = c(0.35, 0.4, 0.45, 0.5), skipFactor = 2)
+multiDFP(trainAliquot, trainFinalRNA, "LungDFP", core = 4, overlapping = c(1, 2), piVal = c(0.4, 0.5, 0.6), z = c(0.35, 0.4, 0.45, 0.5, 0.55), skipFactor = 2)
+
+# skip:1 zeta:0.45   pival:0.4           over:1      genes:870 file:paramList32.Rdata M
+# skip:2 zeta:0.45   pival:0.4           over:1      genes:870 file:paramList32.Rdata F
+# skip:3 zeta:0.45   pival:0.4           over:1      genes:342 file:paramList13.Rdata D
+
+## BOXPLOT
+
+RNAByAliquot_ordered <- t(RNAByAliquot)
+RNAByAliquot_ordered <- as.data.frame(RNAByAliquot_ordered)
+
+RNAByAliquot_ordered["stage"] <- ordered(tRNA_final$cases_0_diagnoses_0_tumor_stage, levels=c("stage i", "stage ii", "stage iii"))
+RNAByAliquot_ordered <- RNAByAliquot_ordered[order(RNAByAliquot_ordered["stage"]),]
+
