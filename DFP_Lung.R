@@ -284,3 +284,13 @@ RNAByAliquot_ordered <- RNAByAliquot_ordered[order(RNAByAliquot_ordered["stage"]
 
 genes_selected <- rownames(paramList$dfps)
 RNAByAliquot_selected <- RNAByAliquot_ordered[,which(genes_selected %in% colnames(RNAByAliquot_ordered))]
+
+RNAByAliquot_selected <- t(RNAByAliquot_selected)
+boxplot(log(RNAByAliquot_selected+8))
+
+colors<- c(rep("red", 275), rep("green", 394-275), rep("blue", 478-394))
+
+boxplot(log(RNAByAliquot_selected[1:50, 1:478]+8))
+boxplot(log(RNAByAliquot_selected[1:20, 1:478]+8), col = colors)
+colors<- c(rep("red", 275), rep("green", 394-275), rep("blue", 478-394))
+
