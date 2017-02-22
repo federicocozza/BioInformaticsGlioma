@@ -1,5 +1,5 @@
 load("tRNA_final.RData")
-load("tmiRNA_final.RData")
+#load("tmiRNA_final.RData")
 load("RNAByAliquotL.RData")
 
 movetolast <- function(data, move) {
