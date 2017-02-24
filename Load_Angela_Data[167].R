@@ -15,21 +15,21 @@ names(patientsID) <- patientsID$ID
 rownames(patientsID) <- patientsID$ID
 
 ### DFP
-'''
+
 class1PatientsRNA <- patientsID[patientsID$class == "Classical",]
 class2PatientsRNA <- patientsID[patientsID$class == "Mesenchymal",]
 class3PatientsRNA <- patientsID[patientsID$class == "Neural",]
 class4PatientsRNA <- patientsID[patientsID$class == "Proneural",]
-'''
+
 ## 75% of the sample size
-'''
+
 smp_size_1 <- floor(0.75 * nrow(class1PatientsRNA))
 smp_size_2 <- floor(0.75 * nrow(class2PatientsRNA))
 smp_size_3 <- floor(0.75 * nrow(class3PatientsRNA))
 smp_size_4 <- floor(0.75 * nrow(class4PatientsRNA))
-'''
+
 ## set the seed to make your partition reproductible
-'''
+
 set.seed(123)
 train_ind_1 <- sample(seq_len(nrow(class1PatientsRNA)), size = smp_size_1)
 train_ind_2 <- sample(seq_len(nrow(class2PatientsRNA)), size = smp_size_2)
@@ -61,7 +61,7 @@ save(trainAliquot,file = "trainAliquot_GLIOMA.Rdata")
 save(testAliquot,file = "testAliquot_GLIOMA.Rdata")
 save(trainFinalRNA,file = "trainFinalRNA_GLIOMA.Rdata")
 save(testFinalRNA,file = "testFinalRNA_GLIOMA.Rdata")
-'''
+
 load("trainAliquot_GLIOMA.Rdata")
 load("testAliquot_GLIOMA.Rdata")
 load("trainFinalRNA_GLIOMA.Rdata")
@@ -71,3 +71,9 @@ multiDFP(trainAliquot, trainFinalRNA, "Glioma", core = 4, overlapping = c(1, 2),
 #################
 multiDFP(trainAliquot, trainFinalRNA, "Glioma", core = 4, overlapping = c(1, 2), piVal = c(0.5, 0.6, 0.7, 0.8),  skipFactor = 1)
 
+
+#### da rivedere
+
+indici_training <- which(names(tRNA) %in% names(trainAliquot))
+
+save(indici_training,file = "indici_training.Rdata")

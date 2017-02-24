@@ -1,19 +1,9 @@
-oxfordGenes <- read.table("oxford/genes.txt",sep="\t",header = T)
-oxfordClass <- read.table("oxford/patient_classes.txt",sep="\t",header = T)
+# trainAliquot : genes X patients [12042, 124]
+# tRNA : genes X patients [12042, 167]
+# egmt_top30 : 30 pathway with highest p-value [30, 9]
 
-best = TRUE
-
-if (best) {
-    load("bestPathways.Rdata")
-    pathways <- bestPathways
-} else {
-    load("reactomeFinal.Rdata")
-    load("keggFinal.Rdata")
-    #load("biocartaFinal.Rdata")
-    pathways <- rbind(reactomeFinal,keggFinal)
-}
-
-load("trainingIdx.RData")
+load("indici_training.Rdata")
+pathways <- egmt_top30
 
 pathways <- pathways[,c("ID","geneID")]
 
@@ -22,11 +12,11 @@ names = row.names(pathways)
 for(i in 1:nrow(pathways)){
     cur <- pathways[i,]
     genes <- strsplit(cur$geneID,"/")[[1]]
-    data = t(oxfordGenes[genes,trainingIdx])
-    write.table(data,file=paste("oxfordPathways/",names[i],".txt",sep=""),quote=F)
+    data = t(tRNA[genes,indici_training])
+    write.table(data,file=paste("ourPathways/",names[i],".txt",sep=""),quote=F)
 }
 
-class <- as.data.frame(as.integer(oxfordClass[trainingIdx,]$x))
+class <- as.data.frame(as.integer(patient_classes[indici_training,]$x))
 names(class) <- "x"
-row.names(class) <- rownames(oxfordClass[trainingIdx,])
-write.table(class,file="oxfordPathways/labels",quote=F)
+row.names(class) <- rownames(patient_classes[indici_training,])
+write.table(class,file="ourPathways/labels",quote=F)
