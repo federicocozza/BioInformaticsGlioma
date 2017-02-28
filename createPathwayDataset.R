@@ -40,3 +40,9 @@ pathway_accuracy$count <- egmt_result_sorted2$Count
 
 save(pathway_accuracy,file = "pathway_accuracy.Rdata")
 
+###
+
+plot(pathway_accuracy$count, pathway_accuracy$avg_acc)
+cor(pathway_accuracy$avg_acc,pathway_accuracy$count)
+
+pathway_accuracy2 <- pathway_accuracy[-which(pathway_accuracy$count>60),]
