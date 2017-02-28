@@ -30,3 +30,10 @@ row.names(class) <- rownames(patient_classes[indici_training,])
 write.table(class,file="Pathways_more_than_10/labels",quote=F)
 
 pathway_accuracy <- read.table("ourPathways_res/test_avg_accuracy.txt", header = TRUE, sep = ",")
+
+pathway_accuracy <- pathway_accuracy[order(pathway_accuracy$X),]
+
+egmt_result_sorted <- egmt_result[,order(ID)]
+egmt_result_sorted2 <- egmt_result_sorted[-which(!(egmt_result_sorted$ID %in% pathway_accuracy$X)),]
+
+pathway_accuracy$count <- egmt_result_sorted2$Count
