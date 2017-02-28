@@ -8,6 +8,8 @@ load("egmt_result.Rdata")
 
 #pathways <- egmt_result[which(egmt_result$pvalue < 0.05),]
 
+pathways <- egmt_result
+
 pathways <- pathways[,c("ID","geneID")]
 
 names = row.names(pathways)
@@ -26,3 +28,5 @@ class <- as.data.frame(as.integer(patient_classes[indici_training,]$x))
 names(class) <- "x"
 row.names(class) <- rownames(patient_classes[indici_training,])
 write.table(class,file="Pathways_more_than_10/labels",quote=F)
+
+pathway_accuracy <- read.table("ourPathways_res/test_avg_accuracy.txt", header = TRUE, sep = ",")
