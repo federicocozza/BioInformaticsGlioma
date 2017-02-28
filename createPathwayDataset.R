@@ -33,7 +33,10 @@ pathway_accuracy <- read.table("ourPathways_res/test_avg_accuracy.txt", header =
 
 pathway_accuracy <- pathway_accuracy[order(pathway_accuracy$X),]
 
-egmt_result_sorted <- egmt_result[,order(ID)]
+egmt_result_sorted <- egmt_result[order(egmt_result$ID),]
 egmt_result_sorted2 <- egmt_result_sorted[-which(!(egmt_result_sorted$ID %in% pathway_accuracy$X)),]
 
 pathway_accuracy$count <- egmt_result_sorted2$Count
+
+save(pathway_accuracy,file = "pathway_accuracy.Rdata")
+
