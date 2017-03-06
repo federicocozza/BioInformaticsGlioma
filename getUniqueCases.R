@@ -1,5 +1,7 @@
-tRNA <- read.table("all_rna.txt", header = TRUE, sep = "\t")
-tmiRNA <- read.table("all_mirna.txt", header = TRUE, sep = "\t")
+#tRNA <- read.table("Dataset//all_rna.txt", header = TRUE, sep = "\t")
+tRNA <- read.table("Dataset//all_genes.txt", header = TRUE, sep = "\t")
+#tmiRNA <- read.table("Dataset/all_mirna.txt", header = TRUE, sep = "\t")
+tmiRNA <- read.table("Dataset/all_mirnas.txt", header = TRUE, sep = "\t")
 
 ##tmiRNA with only mirnas.quantification.txt
 tmiRNA <- tmiRNA[which(tmiRNA$file_name == "mirnas.quantification.txt"),]
