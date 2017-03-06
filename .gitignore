@@ -6,3 +6,4 @@ GDCdata
 *.RData
 progress.log
 Dataset
+*.csv
