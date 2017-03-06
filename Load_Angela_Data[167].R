@@ -6,6 +6,11 @@ ORIG_tRNA <- tRNA
 
 tRNA <- tRNA[,which(names(tRNA) %in% patientsID$x)]
 
+ORIG_tmiRNA <- tmiRNA
+
+tRNA <- tRNA[,which(names(tRNA) %in% patientsID$x)]
+tmiRNA <- tmiRNA[,which(names(tmiRNA) %in% patientsID$x)]
+
 patient_classes <- read.table("Dataset/patient_classes.txt", header = TRUE, sep = "\t")
 
 patientsID[,2] <- patient_classes[,1]
@@ -54,6 +59,11 @@ testFinalRNA <- rbind(test_1, test_2, test_3, test_4)
 trainAliquot <- tRNA[,trainFinalRNA$ID]
 testAliquot <- tRNA[,testFinalRNA$ID]
 
+### New: tmiRNA TRAIN and TEST set
+trainAliquot_tmiRNA <- tmiRNA[,trainFinalRNA$ID]
+testAliquot_tmiRNA <- tmiRNA[,testFinalRNA$ID]
+###
+
 row.names(trainFinalRNA) <- trainFinalRNA$ID
 row.names(testFinalRNA) <- testFinalRNA$ID
 
@@ -61,6 +71,9 @@ save(trainAliquot,file = "trainAliquot_GLIOMA.Rdata")
 save(testAliquot,file = "testAliquot_GLIOMA.Rdata")
 save(trainFinalRNA,file = "trainFinalRNA_GLIOMA.Rdata")
 save(testFinalRNA,file = "testFinalRNA_GLIOMA.Rdata")
+
+save(trainAliquot_tmiRNA,file = "trainAliquot_tmiRNA_GLIOMA.Rdata")
+save(testAliquot_tmiRNA,file = "testAliquot_tmiRNA_GLIOMA.Rdata")
 
 load("trainAliquot_GLIOMA.Rdata")
 load("testAliquot_GLIOMA.Rdata")
@@ -71,6 +84,7 @@ multiDFP(trainAliquot, trainFinalRNA, "Glioma", core = 4, overlapping = c(1, 2),
 #################
 multiDFP(trainAliquot, trainFinalRNA, "Glioma", core = 4, overlapping = c(1, 2), piVal = c(0.5, 0.6, 0.7, 0.8),  skipFactor = 1)
 
+### SCELTO paramList10.Rdata con 635 geni: paramList$dfps
 
 #### da rivedere
 
